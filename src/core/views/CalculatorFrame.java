@@ -5,6 +5,9 @@
 package core.views;
 
 import core.controllers.Calculator;
+import core.controllers.CalculatorSumController;
+import core.controllers.utils.Formatter;
+import core.controllers.utils.Response;
 import core.models.History;
 import core.models.Operation;
 import java.util.ArrayList;
@@ -17,7 +20,7 @@ import javax.swing.JOptionPane;
  * @author edangulo
  */
 public class CalculatorFrame extends javax.swing.JFrame {
-    
+
     private History history;
 
     /**
@@ -215,18 +218,22 @@ public class CalculatorFrame extends javax.swing.JFrame {
 
     private void sumNumbersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sumNumbersActionPerformed
         // TODO add your handling code here:
-        try {
-            Calculator calculator = new Calculator();
-            
-            double number1 = Double.parseDouble(fieldNumber1.getText());
-            double number2 = Double.parseDouble(fieldNumber2.getText());
-            double result = calculator.add(number1, number2);
-            
-            this.history.addOperation(new Operation(number1, number2, "+", result));
-            
-            fieldResult.setText("" + result);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
+        String number1 = fieldNumber1.getText();
+        String number2 = fieldNumber2.getText();
+
+        Response response = CalculatorSumController.sum(number1, number2);
+
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            Operation opDone = (Operation) response.getObject();
+            fieldResult.setText(Formatter.format(opDone.getResult()));
+            fieldNumber1.setText(Formatter.format(opDone.getNumber1()));
+            fieldNumber2.setText(Formatter.format(opDone.getNumber2()));
+
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Success", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_sumNumbersActionPerformed
 
@@ -234,13 +241,13 @@ public class CalculatorFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Calculator calculator = new Calculator();
-            
+
             double number1 = Double.parseDouble(fieldNumber1.getText());
             double number2 = Double.parseDouble(fieldNumber2.getText());
             double result = calculator.subtract(number1, number2);
-            
+
             this.history.addOperation(new Operation(number1, number2, "-", result));
-            
+
             fieldResult.setText("" + result);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
@@ -251,13 +258,13 @@ public class CalculatorFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Calculator calculator = new Calculator();
-            
+
             double number1 = Double.parseDouble(fieldNumber1.getText());
             double number2 = Double.parseDouble(fieldNumber2.getText());
             double result = calculator.multiply(number1, number2);
-            
+
             this.history.addOperation(new Operation(number1, number2, "*", result));
-            
+
             fieldResult.setText("" + result);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
@@ -268,13 +275,13 @@ public class CalculatorFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Calculator calculator = new Calculator();
-            
+
             double number1 = Double.parseDouble(fieldNumber1.getText());
             double number2 = Double.parseDouble(fieldNumber2.getText());
             double result = calculator.divide(number1, number2);
-            
+
             this.history.addOperation(new Operation(number1, number2, "/", result));
-            
+
             fieldResult.setText("" + result);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
@@ -297,7 +304,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         ArrayList<Operation> operationHistory = this.history.getOperations();
         Collections.reverse(this.history.getOperations());
-        
+
         DefaultListModel model = new DefaultListModel();
         model.addAll(operationHistory);
         jList1.setModel(model);
