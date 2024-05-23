@@ -11,10 +11,11 @@ import java.util.ArrayList;
  * @author edangulo
  */
 public class History {
+    static History instance;
     
     private ArrayList<Operation> operations;
 
-    public History() {
+    private History() {
         this.operations = new ArrayList<>();
     }
     
@@ -25,5 +26,11 @@ public class History {
     public ArrayList<Operation> getOperations() {
         return operations;
     }
-    
+
+    public static History getInstance() {
+        if(instance == null) {
+            instance = new History();
+        }
+        return instance;
+    }    
 }

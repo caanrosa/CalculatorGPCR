@@ -24,7 +24,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
      * Creates new form Calculator
      */
     public CalculatorFrame() {
-        this.history = new History();
+        this.history = History.getInstance();
         initComponents();
     }
 
