@@ -17,9 +17,9 @@ import core.models.operations.Addition;
  */
 public class AdditionController {
 
-    public static Response sum(String n1, String n2) {
+    public static Response add(String n1, String n2) {
         History history = History.getInstance();
-        double number1, number2, result;
+        double number1, number2;
 
         try {
             number1 = Double.parseDouble(n1);
@@ -40,12 +40,10 @@ public class AdditionController {
             return new Response("Number 2 must have less than 3 decimals", Status.BAD_REQUEST);
         }
 
-        result = number1 + number2;
-
-        Operation operation = new Addition(number1, number2, result);
+        Operation operation = new Addition(number1, number2);
         history.addOperation(operation);
 
-        return new Response("Sum done successfully", Status.OK, operation);
+        return new Response("Addition done successfully", Status.OK, operation);
     }
 
 }

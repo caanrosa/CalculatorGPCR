@@ -4,14 +4,14 @@
  */
 package core.views;
 
-import core.controllers.Calculator;
-import core.controllers.CalculatorDivisionController;
-import core.controllers.CalculatorMultiplyController;
-import core.controllers.CalculatorPotentiationController;
-import core.controllers.CalculatorSubstractionController;
-import core.controllers.CalculatorSumController;
-import core.controllers.utils.Formatter;
+import core.controllers.DivisionController;
+import core.controllers.MultiplicationController;
+import core.controllers.ExponentiationController;
+import core.controllers.SubtractionController;
+import core.controllers.AdditionController;
+import core.controllers.ValuesController;
 import core.controllers.utils.Response;
+import core.models.Formatter;
 import core.models.History;
 import core.models.Operation;
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
 
         titleLabel = new javax.swing.JLabel();
         sumNumbers = new javax.swing.JButton();
-        substractNumbers = new javax.swing.JButton();
+        subtractNumbers = new javax.swing.JButton();
         multiplyNumbers = new javax.swing.JButton();
         divideNumbers = new javax.swing.JButton();
         potencyNumbers = new javax.swing.JButton();
@@ -58,7 +58,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
         number2Label = new javax.swing.JLabel();
         resultLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        historyList = new javax.swing.JList<>();
         fieldResult = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -74,11 +74,11 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
-        substractNumbers.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        substractNumbers.setText("Subtract");
-        substractNumbers.addActionListener(new java.awt.event.ActionListener() {
+        subtractNumbers.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        subtractNumbers.setText("Subtract");
+        subtractNumbers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                substractNumbersActionPerformed(evt);
+                subtractNumbersActionPerformed(evt);
             }
         });
 
@@ -135,9 +135,9 @@ public class CalculatorFrame extends javax.swing.JFrame {
         resultLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         resultLabel.setText("Result");
 
-        jList1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jList1.setEnabled(false);
-        jScrollPane1.setViewportView(jList1);
+        historyList.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        historyList.setEnabled(false);
+        jScrollPane1.setViewportView(historyList);
 
         fieldResult.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         fieldResult.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -169,7 +169,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
                             .addComponent(sumNumbers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(substractNumbers, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                            .addComponent(subtractNumbers, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                             .addComponent(divideNumbers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,7 +204,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(sumNumbers)
-                            .addComponent(substractNumbers))
+                            .addComponent(subtractNumbers))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(divideNumbers)
@@ -225,7 +225,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
         String number1 = fieldNumber1.getText();
         String number2 = fieldNumber2.getText();
 
-        Response response = AdditionController.sum(number1, number2);
+        Response response = AdditionController.add(number1, number2);
 
         if (response.getStatus() >= 500) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
@@ -250,7 +250,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_sumNumbersActionPerformed
 
-    private void substractNumbersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_substractNumbersActionPerformed
+    private void subtractNumbersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subtractNumbersActionPerformed
         // TODO add your handling code here:
         String number1 = fieldNumber1.getText();
         String number2 = fieldNumber2.getText();
@@ -271,20 +271,20 @@ public class CalculatorFrame extends javax.swing.JFrame {
             if(number1Format.getStatus() >= 500) JOptionPane.showMessageDialog(null, number1Format.getMessage(), "Error " + number1Format.getStatus(), JOptionPane.ERROR_MESSAGE);
             if(number2Format.getStatus() >= 500) JOptionPane.showMessageDialog(null, number2Format.getMessage(), "Error " + number2Format.getStatus(), JOptionPane.ERROR_MESSAGE);
             
-            fieldResult.setText(Formatter.format(opDone.getResult()));
-            fieldNumber1.setText(Formatter.format(opDone.getNumber1()));
-            fieldNumber2.setText(Formatter.format(opDone.getNumber2()));
-
+            fieldResult.setText((String) resultFormat.getObject());
+            fieldNumber1.setText((String) number1Format.getObject());
+            fieldNumber2.setText((String) number2Format.getObject());
+            
             JOptionPane.showMessageDialog(null, response.getMessage(), "Success", JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_substractNumbersActionPerformed
+    }//GEN-LAST:event_subtractNumbersActionPerformed
 
     private void multiplyNumbersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiplyNumbersActionPerformed
         // TODO add your handling code here:
         String number1 = fieldNumber1.getText();
         String number2 = fieldNumber2.getText();
         
-        Response response = CalculatorMultiplyController.mult(number1, number2);
+        Response response = MultiplicationController.mult(number1, number2);
 
         if (response.getStatus() >= 500) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
@@ -292,6 +292,9 @@ public class CalculatorFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
         } else {
             Operation opDone = (Operation) response.getObject();
+            
+            // TODO: USE VALUESCONTROLLER
+            
             fieldResult.setText(Formatter.format(opDone.getResult()));
             fieldNumber1.setText(Formatter.format(opDone.getNumber1()));
             fieldNumber2.setText(Formatter.format(opDone.getNumber2()));
@@ -305,7 +308,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
         String number1 = fieldNumber1.getText();
         String number2 = fieldNumber2.getText();
         
-        Response response = CalculatorDivisionController.div(number1, number2);
+        Response response = DivisionController.div(number1, number2);
 
         if (response.getStatus() >= 500) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
@@ -313,6 +316,9 @@ public class CalculatorFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
         } else {
             Operation opDone = (Operation) response.getObject();
+            
+            // TODO: USE VALUESCONTROLLER
+            
             fieldResult.setText(Formatter.format(opDone.getResult()));
             fieldNumber1.setText(Formatter.format(opDone.getNumber1()));
             fieldNumber2.setText(Formatter.format(opDone.getNumber2()));
@@ -326,7 +332,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
       String number1 = fieldNumber1.getText();
         String number2 = fieldNumber2.getText();
         
-        Response response = CalculatorPotentiationController.pow(number1, number2);
+        Response response = ExponentiationController.pow(number1, number2);
 
         if (response.getStatus() >= 500) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
@@ -334,6 +340,9 @@ public class CalculatorFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
         } else {
             Operation opDone = (Operation) response.getObject();
+            
+            // TODO: USE VALUESCONTROLLER
+            
             fieldResult.setText(Formatter.format(opDone.getResult()));
             fieldNumber1.setText(Formatter.format(opDone.getNumber1()));
             fieldNumber2.setText(Formatter.format(opDone.getNumber2()));
@@ -356,7 +365,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
 
         DefaultListModel model = new DefaultListModel();
         model.addAll(operationHistory);
-        jList1.setModel(model);
+        historyList.setModel(model);
     }//GEN-LAST:event_updateOperationHistoryActionPerformed
 
     /**
@@ -401,14 +410,14 @@ public class CalculatorFrame extends javax.swing.JFrame {
     private javax.swing.JTextField fieldNumber1;
     private javax.swing.JTextField fieldNumber2;
     private javax.swing.JTextField fieldResult;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> historyList;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton multiplyNumbers;
     private javax.swing.JLabel number1Label;
     private javax.swing.JLabel number2Label;
     private javax.swing.JButton potencyNumbers;
     private javax.swing.JLabel resultLabel;
-    private javax.swing.JButton substractNumbers;
+    private javax.swing.JButton subtractNumbers;
     private javax.swing.JButton sumNumbers;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JButton updateOperationHistory;

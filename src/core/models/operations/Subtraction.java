@@ -13,8 +13,8 @@ import core.models.Operation;
 public class Subtraction extends Operation 
 {
     
-    public Subtraction(double number1, double number2, double result) {
-        super(number1, number2, "-", result);
+    public Subtraction(double number1, double number2) {
+        super(number1, number2, "-", number1 - number2);
     }
     
 }

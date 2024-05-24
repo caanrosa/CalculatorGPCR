@@ -12,8 +12,8 @@ import core.models.Operation;
  */
 public class Division extends Operation {
     
-    public Division(double number1, double number2, double result) {
-        super(number1, number2, "/", result);
+    public Division(double number1, double number2) {
+        super(number1, number2, "/", number1 / number2);
     }
     
 }

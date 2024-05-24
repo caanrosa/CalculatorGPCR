@@ -12,8 +12,8 @@ import core.models.Operation;
  */
 public class Addition extends Operation {
     
-    public Addition(double number1, double number2, double result) {
-        super(number1, number2, "+", result);
+    public Addition(double number1, double number2) {
+        super(number1, number2, "+", number1 + number2);
     }
     
 }
