@@ -7,6 +7,7 @@ package core.views;
 import core.controllers.Calculator;
 import core.controllers.CalculatorDivisionController;
 import core.controllers.CalculatorMultiplyController;
+import core.controllers.CalculatorPotentiationController;
 import core.controllers.CalculatorSubstractionController;
 import core.controllers.CalculatorSumController;
 import core.controllers.utils.Formatter;
@@ -305,7 +306,23 @@ public class CalculatorFrame extends javax.swing.JFrame {
 
     private void potencyNumbersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_potencyNumbersActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Not Implemented", "Error", JOptionPane.ERROR_MESSAGE);
+      String number1 = fieldNumber1.getText();
+        String number2 = fieldNumber2.getText();
+        
+        Response response = CalculatorPotentiationController.pow(number1, number2);
+
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            Operation opDone = (Operation) response.getObject();
+            fieldResult.setText(Formatter.format(opDone.getResult()));
+            fieldNumber1.setText(Formatter.format(opDone.getNumber1()));
+            fieldNumber2.setText(Formatter.format(opDone.getNumber2()));
+
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Success", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_potencyNumbersActionPerformed
 
     private void clearNumbersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearNumbersActionPerformed
