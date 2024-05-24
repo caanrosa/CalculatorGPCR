@@ -33,10 +33,10 @@ public class SubtractionController {
         }
 
         if (!DecimalChecker.check(number1)) {
-            return new Response("Number 1 must have less than 3 decimals", Status.BAD_REQUEST);
+            return new Response("Number 1 must have less than " + DecimalChecker.getDecimalLength() + " decimals", Status.BAD_REQUEST);
         }
         if (!DecimalChecker.check(number2)) {
-            return new Response("Number 2 must have less than 3 decimals", Status.BAD_REQUEST);
+            return new Response("Number 2 must have less than " + DecimalChecker.getDecimalLength() + " decimals", Status.BAD_REQUEST);
         }
 
         Operation operation = new Subtraction(number1, number2);
