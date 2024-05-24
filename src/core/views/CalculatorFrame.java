@@ -5,9 +5,10 @@
 package core.views;
 
 import core.controllers.Calculator;
-import core.controllers.CalculatorSubtractionController;
-import core.controllers.CalculatorSumController;
-import core.controllers.utils.Formatter;
+import core.controllers.SubtractionController;
+import core.controllers.AdditionController;
+import core.controllers.ValuesController;
+import core.models.Formatter;
 import core.controllers.utils.Response;
 import core.models.History;
 import core.models.Operation;
@@ -222,7 +223,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
         String number1 = fieldNumber1.getText();
         String number2 = fieldNumber2.getText();
 
-        Response response = CalculatorSumController.sum(number1, number2);
+        Response response = AdditionController.sum(number1, number2);
 
         if (response.getStatus() >= 500) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
@@ -230,9 +231,18 @@ public class CalculatorFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
         } else {
             Operation opDone = (Operation) response.getObject();
-            fieldResult.setText(Formatter.format(opDone.getResult()));
-            fieldNumber1.setText(Formatter.format(opDone.getNumber1()));
-            fieldNumber2.setText(Formatter.format(opDone.getNumber2()));
+
+            Response resultFormat = ValuesController.format(opDone.getResult());
+            Response number1Format = ValuesController.format(opDone.getNumber1());
+            Response number2Format = ValuesController.format(opDone.getNumber2());
+            
+            if(resultFormat.getStatus() >= 500) JOptionPane.showMessageDialog(null, resultFormat.getMessage(), "Error " + resultFormat.getStatus(), JOptionPane.ERROR_MESSAGE);
+            if(number1Format.getStatus() >= 500) JOptionPane.showMessageDialog(null, number1Format.getMessage(), "Error " + number1Format.getStatus(), JOptionPane.ERROR_MESSAGE);
+            if(number2Format.getStatus() >= 500) JOptionPane.showMessageDialog(null, number2Format.getMessage(), "Error " + number2Format.getStatus(), JOptionPane.ERROR_MESSAGE);
+
+            fieldResult.setText((String) resultFormat.getObject());
+            fieldNumber1.setText((String) number1Format.getObject());
+            fieldNumber2.setText((String) number2Format.getObject());
 
             JOptionPane.showMessageDialog(null, response.getMessage(), "Success", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -243,7 +253,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
         String number1 = fieldNumber1.getText();
         String number2 = fieldNumber2.getText();
 
-        Response response = CalculatorSubtractionController.subtract(number1, number2);
+        Response response = SubtractionController.subtract(number1, number2);
 
         if (response.getStatus() >= 500) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
@@ -251,6 +261,14 @@ public class CalculatorFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
         } else {
             Operation opDone = (Operation) response.getObject();
+            Response resultFormat = ValuesController.format(opDone.getResult());
+            Response number1Format = ValuesController.format(opDone.getNumber1());
+            Response number2Format = ValuesController.format(opDone.getNumber2());
+            
+            if(resultFormat.getStatus() >= 500) JOptionPane.showMessageDialog(null, resultFormat.getMessage(), "Error " + resultFormat.getStatus(), JOptionPane.ERROR_MESSAGE);
+            if(number1Format.getStatus() >= 500) JOptionPane.showMessageDialog(null, number1Format.getMessage(), "Error " + number1Format.getStatus(), JOptionPane.ERROR_MESSAGE);
+            if(number2Format.getStatus() >= 500) JOptionPane.showMessageDialog(null, number2Format.getMessage(), "Error " + number2Format.getStatus(), JOptionPane.ERROR_MESSAGE);
+            
             fieldResult.setText(Formatter.format(opDone.getResult()));
             fieldNumber1.setText(Formatter.format(opDone.getNumber1()));
             fieldNumber2.setText(Formatter.format(opDone.getNumber2()));

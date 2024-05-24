@@ -4,19 +4,19 @@
  */
 package core.controllers;
 
-import core.controllers.utils.DecimalChecker;
+import core.models.DecimalChecker;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 import core.models.History;
 import core.models.Operation;
+import core.models.operations.Subtraction;
 
 /**
  *
  * @author Usuario
  */
-public class CalculatorSumController {
-
-    public static Response sum(String n1, String n2) {
+public class SubtractionController {
+    public static Response subtract(String n1, String n2) {
         History history = History.getInstance();
         double number1, number2, result;
 
@@ -33,18 +33,17 @@ public class CalculatorSumController {
         }
 
         if (!DecimalChecker.check(number1)) {
-            return new Response("Number 1 must have less than 3 decimals", Status.BAD_REQUEST);
+            return new Response("Number 1 must have less than " + DecimalChecker.getDecimalLength() + " decimals", Status.BAD_REQUEST);
         }
         if (!DecimalChecker.check(number2)) {
-            return new Response("Number 2 must have less than 3 decimals", Status.BAD_REQUEST);
+            return new Response("Number 2 must have less than " + DecimalChecker.getDecimalLength() + " decimals", Status.BAD_REQUEST);
         }
 
-        result = number1 + number2;
+        result = number1 - number2;
 
-        Operation operation = new Operation(number1, number2, "+", result);
+        Operation operation = new Subtraction(number1, number2, result);
         history.addOperation(operation);
 
-        return new Response("Sum done successfully", Status.OK, operation);
+        return new Response("Substraction done successfully", Status.OK, operation);
     }
-
 }
