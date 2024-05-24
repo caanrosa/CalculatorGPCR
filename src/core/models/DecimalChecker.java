@@ -4,6 +4,7 @@
  */
 package core.models;
 
+import java.math.BigDecimal;
 /**
  *
  * @author Usuario
@@ -13,12 +14,10 @@ public class DecimalChecker {
     private static int decimalLenght = 3;
 
     public static Boolean check(double number) {
-        String s = String.valueOf(number);
-        String[] splitted = s.split("[.]");
-
-        String decimalPart = splitted[1];
-
-        return decimalPart.length() <= decimalLenght;
+        BigDecimal bd = new BigDecimal(Double.toString(number));
+        bd = bd.stripTrailingZeros();
+        int scale = bd.scale();
+        return scale <= decimalLenght;
     }
     
     public static int getDecimalLength() {
