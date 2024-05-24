@@ -7,6 +7,7 @@ package core.views;
 import core.controllers.Calculator;
 import core.controllers.CalculatorDivisionController;
 import core.controllers.CalculatorMultiplyController;
+import core.controllers.CalculatorSubstractionController;
 import core.controllers.CalculatorSumController;
 import core.controllers.utils.Formatter;
 import core.controllers.utils.Response;
@@ -241,18 +242,22 @@ public class CalculatorFrame extends javax.swing.JFrame {
 
     private void substractNumbersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_substractNumbersActionPerformed
         // TODO add your handling code here:
-        try {
-            Calculator calculator = new Calculator();
+        String number1 = fieldNumber1.getText();
+        String number2 = fieldNumber2.getText();
+        
+        Response response = CalculatorSubstractionController.substract(number1, number2);
 
-            double number1 = Double.parseDouble(fieldNumber1.getText());
-            double number2 = Double.parseDouble(fieldNumber2.getText());
-            double result = calculator.subtract(number1, number2);
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            Operation opDone = (Operation) response.getObject();
+            fieldResult.setText(Formatter.format(opDone.getResult()));
+            fieldNumber1.setText(Formatter.format(opDone.getNumber1()));
+            fieldNumber2.setText(Formatter.format(opDone.getNumber2()));
 
-            this.history.addOperation(new Operation(number1, number2, "-", result));
-
-            fieldResult.setText("" + result);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Success", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_substractNumbersActionPerformed
 
