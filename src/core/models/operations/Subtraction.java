@@ -16,5 +16,10 @@ public class Subtraction extends Operation
     public Subtraction(double number1, double number2) {
         super(number1, number2, "-", number1 - number2);
     }
+
+    @Override
+    public void accelerate() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

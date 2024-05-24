@@ -38,4 +38,6 @@ public abstract class Operation {
     public double getResult() {
         return result;
     }
+    
+    public abstract void accelerate();
 }
