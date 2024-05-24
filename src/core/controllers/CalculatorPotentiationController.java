@@ -44,6 +44,6 @@ public class CalculatorPotentiationController {
         Operation operation = new Operation(number1, number2, "^", result);
         history.addOperation(operation);
 
-        return new Response("Potentiation done successfully", Status.OK, operation);
+        return new Response("Exponentiation  done successfully", Status.OK, operation);
     }
 }
