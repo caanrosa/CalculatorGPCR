@@ -4,6 +4,7 @@
  */
 package core.controllers.utils;
 
+import java.math.BigDecimal;
 /**
  *
  * @author Usuario
@@ -11,11 +12,9 @@ package core.controllers.utils;
 public class DecimalChecker {
 
     public static Boolean check(double number) {
-        String s = String.valueOf(number);
-        String[] splitted = s.split("[.]");
-
-        String decimalPart = splitted[1];
-
-        return decimalPart.length() <= 3;
+        BigDecimal bd = new BigDecimal(Double.toString(number));
+        bd = bd.stripTrailingZeros();
+        int scale = bd.scale();
+        return scale <= 3;
     }
 }
