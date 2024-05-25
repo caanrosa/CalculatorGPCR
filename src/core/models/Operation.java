@@ -10,16 +10,15 @@ package core.models;
  */
 public abstract class Operation {
 
-    private double number1;
-    private double number2;
-    private String operator;
-    private double result;
+    protected double number1;
+    protected double number2;
+    protected String operator;
+    protected double result;
 
-    public Operation(double number1, double number2, String operator, double result) {
+    public Operation(double number1, double number2, String operator) {
         this.number1 = number1;
         this.number2 = number2;
         this.operator = operator;
-        this.result = result;
     }
 
     @Override
@@ -38,6 +37,10 @@ public abstract class Operation {
     public double getResult() {
         return result;
     }
+
+    public void setResult(double result) {
+        this.result = result;
+    }    
     
-    public abstract void accelerate();
+    public abstract void evaluate();
 }

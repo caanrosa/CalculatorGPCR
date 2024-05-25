@@ -15,8 +15,9 @@ import core.models.operations.Subtraction;
  *
  * @author croja
  */
-public class SubtractionController {    
-     public static Response subtract(String n1, String n2) {
+public class SubtractionController {
+
+    public static Response subtract(String n1, String n2) {
         History history = History.getInstance();
         double number1, number2;
 
@@ -40,6 +41,7 @@ public class SubtractionController {
         }
 
         Operation operation = new Subtraction(number1, number2);
+        operation.evaluate();
         history.addOperation(operation);
 
         return new Response("Substraction done successfully", Status.OK, operation);

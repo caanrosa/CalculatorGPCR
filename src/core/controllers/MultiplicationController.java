@@ -16,8 +16,8 @@ import core.models.operations.Multiplication;
  * @author croja
  */
 public class MultiplicationController {
-    
-     public static Response mult(String n1, String n2) {
+
+    public static Response mult(String n1, String n2) {
         History history = History.getInstance();
         double number1, number2;
 
@@ -41,6 +41,7 @@ public class MultiplicationController {
         }
 
         Operation operation = new Multiplication(number1, number2);
+        operation.evaluate();
         history.addOperation(operation);
 
         return new Response("Multiplication done successfully", Status.OK, operation);

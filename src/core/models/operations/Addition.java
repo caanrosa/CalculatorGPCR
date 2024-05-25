@@ -13,12 +13,12 @@ import core.models.Operation;
 public class Addition extends Operation {
     
     public Addition(double number1, double number2) {
-        super(number1, number2, "+", number1 + number2);
+        super(number1, number2, "+");
     }
 
     @Override
-    public void accelerate() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void evaluate() {
+        this.setResult(this.number1 + this.number2);
     }
     
 }

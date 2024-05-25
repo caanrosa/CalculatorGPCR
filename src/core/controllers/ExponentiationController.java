@@ -16,7 +16,7 @@ import core.models.operations.Exponentiation;
  * @author croja
  */
 public class ExponentiationController {
-    
+
     public static Response pow(String n1, String n2) {
         History history = History.getInstance();
         double number1, number2;
@@ -41,6 +41,7 @@ public class ExponentiationController {
         }
 
         Operation operation = new Exponentiation(number1, number2);
+        operation.evaluate();
         history.addOperation(operation);
 
         return new Response("Exponentiation done successfully", Status.OK, operation);

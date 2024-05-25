@@ -16,7 +16,8 @@ import core.models.operations.Division;
  * @author croja
  */
 public class DivisionController {
-         public static Response div(String n1, String n2) {
+
+    public static Response div(String n1, String n2) {
         History history = History.getInstance();
         double number1, number2;
 
@@ -38,12 +39,13 @@ public class DivisionController {
         if (!DecimalChecker.check(number2)) {
             return new Response("Number 2 must have less than 3 decimals", Status.BAD_REQUEST);
         }
-        
-        if(number2 == 0) {
+
+        if (number2 == 0) {
             return new Response("Number 2 must not be zero", Status.BAD_REQUEST);
         }
 
         Operation operation = new Division(number1, number2);
+        operation.evaluate();
         history.addOperation(operation);
 
         return new Response("Division done successfully", Status.OK, operation);

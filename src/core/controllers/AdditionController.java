@@ -41,6 +41,7 @@ public class AdditionController {
         }
 
         Operation operation = new Addition(number1, number2);
+        operation.evaluate();
         history.addOperation(operation);
 
         return new Response("Addition done successfully", Status.OK, operation);
