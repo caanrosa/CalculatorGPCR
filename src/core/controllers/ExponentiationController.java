@@ -4,21 +4,22 @@
  */
 package core.controllers;
 
-import core.controllers.utils.DecimalChecker;
+import core.models.DecimalChecker;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 import core.models.History;
 import core.models.Operation;
+import core.models.operations.Exponentiation;
 
 /**
  *
- * @author Usuario
+ * @author croja
  */
-public class CalculatorSumController {
+public class ExponentiationController {
 
-    public static Response sum(String n1, String n2) {
+    public static Response pow(String n1, String n2) {
         History history = History.getInstance();
-        double number1, number2, result;
+        double number1, number2;
 
         try {
             number1 = Double.parseDouble(n1);
@@ -39,12 +40,10 @@ public class CalculatorSumController {
             return new Response("Number 2 must have less than 3 decimals", Status.BAD_REQUEST);
         }
 
-        result = number1 + number2;
-
-        Operation operation = new Operation(number1, number2, "+", result);
+        Operation operation = new Exponentiation(number1, number2);
+        operation.evaluate();
         history.addOperation(operation);
 
-        return new Response("Sum done successfully", Status.OK, operation);
+        return new Response("Exponentiation done successfully", Status.OK, operation);
     }
-
 }

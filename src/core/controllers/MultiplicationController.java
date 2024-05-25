@@ -4,21 +4,22 @@
  */
 package core.controllers;
 
-import core.controllers.utils.DecimalChecker;
+import core.models.DecimalChecker;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 import core.models.History;
 import core.models.Operation;
+import core.models.operations.Multiplication;
 
 /**
  *
  * @author croja
  */
-public class CalculatorSubstractionController {
-    
-     public static Response substract(String n1, String n2) {
+public class MultiplicationController {
+
+    public static Response mult(String n1, String n2) {
         History history = History.getInstance();
-        double number1, number2, result;
+        double number1, number2;
 
         try {
             number1 = Double.parseDouble(n1);
@@ -39,11 +40,10 @@ public class CalculatorSubstractionController {
             return new Response("Number 2 must have less than 3 decimals", Status.BAD_REQUEST);
         }
 
-        result = number1 - number2;
-
-        Operation operation = new Operation(number1, number2, "-", result);
+        Operation operation = new Multiplication(number1, number2);
+        operation.evaluate();
         history.addOperation(operation);
 
-        return new Response("Substraction done successfully", Status.OK, operation);
+        return new Response("Multiplication done successfully", Status.OK, operation);
     }
 }

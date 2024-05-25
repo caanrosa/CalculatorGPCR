@@ -49,7 +49,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="substractNumbers" pref="98" max="32767" attributes="0"/>
+                          <Component id="subtractNumbers" pref="98" max="32767" attributes="0"/>
                           <Component id="divideNumbers" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -94,7 +94,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="sumNumbers" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="substractNumbers" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="subtractNumbers" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -133,7 +133,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sumNumbersActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="substractNumbers">
+    <Component class="javax.swing.JButton" name="subtractNumbers">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="12" style="1"/>
@@ -141,7 +141,7 @@
         <Property name="text" type="java.lang.String" value="Subtract"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="substractNumbersActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="subtractNumbersActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="multiplyNumbers">
@@ -240,7 +240,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JList" name="jList1">
+        <Component class="javax.swing.JList" name="historyList">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Consolas" size="12" style="0"/>
