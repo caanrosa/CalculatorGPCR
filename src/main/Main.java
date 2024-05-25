@@ -13,6 +13,7 @@ import core.views.CalculatorFrame;
 public class Main {
 
     public static void main(String[] args) {
+        System.out.println("Running from main file.");
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
