@@ -10,6 +10,7 @@ import core.models.Formatter;
 import core.models.History;
 import core.models.Operation;
 import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.DefaultListModel;
 
 /**
@@ -36,6 +37,9 @@ public class HistoryController {
                 String formattedOperation = formattedNumber1 + " " + op.getOperator() + " " + formattedNumber2 + " = " + formattedResult;
                 formattedOperations.add(formattedOperation);
             }
+            
+            Collections.reverse(formattedOperations);
+            
             model.addAll(formattedOperations);
             return new Response("History operations success", Status.CREATED, model);
         } catch (Exception e) {
