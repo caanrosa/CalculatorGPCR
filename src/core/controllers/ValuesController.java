@@ -13,6 +13,7 @@ import core.models.Formatter;
  * @author Usuario
  */
 public class ValuesController {
+    
     public static Response format(double number) {
         try {
             String formatted = Formatter.format(number);
