@@ -9,6 +9,7 @@ import core.controllers.MultiplicationController;
 import core.controllers.ExponentiationController;
 import core.controllers.SubtractionController;
 import core.controllers.AdditionController;
+import core.controllers.HistoryController;
 import core.controllers.ValuesController;
 import core.controllers.utils.Response;
 import core.models.Formatter;
@@ -408,12 +409,19 @@ public class CalculatorFrame extends javax.swing.JFrame {
 
     private void updateOperationHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateOperationHistoryActionPerformed
         // TODO add your handling code here:
-        ArrayList<Operation> operationHistory = this.history.getOperations();
-        Collections.reverse(this.history.getOperations());
+        Response response = HistoryController.getHistory();
+        
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            DefaultListModel opDone = (DefaultListModel) response.getObject();
+            historyList.setModel(opDone);
 
-        DefaultListModel model = new DefaultListModel();
-        model.addAll(operationHistory);
-        historyList.setModel(model);
+            // TODO: USE VALUESCONTROLLER
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Success", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_updateOperationHistoryActionPerformed
 
     /**
