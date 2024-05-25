@@ -238,10 +238,16 @@ public class CalculatorFrame extends javax.swing.JFrame {
             Response resultFormat = ValuesController.format(opDone.getResult());
             Response number1Format = ValuesController.format(opDone.getNumber1());
             Response number2Format = ValuesController.format(opDone.getNumber2());
-            
-            if(resultFormat.getStatus() >= 500) JOptionPane.showMessageDialog(null, resultFormat.getMessage(), "Error " + resultFormat.getStatus(), JOptionPane.ERROR_MESSAGE);
-            if(number1Format.getStatus() >= 500) JOptionPane.showMessageDialog(null, number1Format.getMessage(), "Error " + number1Format.getStatus(), JOptionPane.ERROR_MESSAGE);
-            if(number2Format.getStatus() >= 500) JOptionPane.showMessageDialog(null, number2Format.getMessage(), "Error " + number2Format.getStatus(), JOptionPane.ERROR_MESSAGE);
+
+            if (resultFormat.getStatus() >= 500) {
+                JOptionPane.showMessageDialog(null, resultFormat.getMessage(), "Error " + resultFormat.getStatus(), JOptionPane.ERROR_MESSAGE);
+            }
+            if (number1Format.getStatus() >= 500) {
+                JOptionPane.showMessageDialog(null, number1Format.getMessage(), "Error " + number1Format.getStatus(), JOptionPane.ERROR_MESSAGE);
+            }
+            if (number2Format.getStatus() >= 500) {
+                JOptionPane.showMessageDialog(null, number2Format.getMessage(), "Error " + number2Format.getStatus(), JOptionPane.ERROR_MESSAGE);
+            }
 
             fieldResult.setText((String) resultFormat.getObject());
             fieldNumber1.setText((String) number1Format.getObject());
@@ -267,15 +273,21 @@ public class CalculatorFrame extends javax.swing.JFrame {
             Response resultFormat = ValuesController.format(opDone.getResult());
             Response number1Format = ValuesController.format(opDone.getNumber1());
             Response number2Format = ValuesController.format(opDone.getNumber2());
-            
-            if(resultFormat.getStatus() >= 500) JOptionPane.showMessageDialog(null, resultFormat.getMessage(), "Error " + resultFormat.getStatus(), JOptionPane.ERROR_MESSAGE);
-            if(number1Format.getStatus() >= 500) JOptionPane.showMessageDialog(null, number1Format.getMessage(), "Error " + number1Format.getStatus(), JOptionPane.ERROR_MESSAGE);
-            if(number2Format.getStatus() >= 500) JOptionPane.showMessageDialog(null, number2Format.getMessage(), "Error " + number2Format.getStatus(), JOptionPane.ERROR_MESSAGE);
-            
+
+            if (resultFormat.getStatus() >= 500) {
+                JOptionPane.showMessageDialog(null, resultFormat.getMessage(), "Error " + resultFormat.getStatus(), JOptionPane.ERROR_MESSAGE);
+            }
+            if (number1Format.getStatus() >= 500) {
+                JOptionPane.showMessageDialog(null, number1Format.getMessage(), "Error " + number1Format.getStatus(), JOptionPane.ERROR_MESSAGE);
+            }
+            if (number2Format.getStatus() >= 500) {
+                JOptionPane.showMessageDialog(null, number2Format.getMessage(), "Error " + number2Format.getStatus(), JOptionPane.ERROR_MESSAGE);
+            }
+
             fieldResult.setText((String) resultFormat.getObject());
             fieldNumber1.setText((String) number1Format.getObject());
             fieldNumber2.setText((String) number2Format.getObject());
-            
+
             JOptionPane.showMessageDialog(null, response.getMessage(), "Success", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_subtractNumbersActionPerformed
@@ -284,7 +296,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         String number1 = fieldNumber1.getText();
         String number2 = fieldNumber2.getText();
-        
+
         Response response = MultiplicationController.mult(number1, number2);
 
         if (response.getStatus() >= 500) {
@@ -293,12 +305,24 @@ public class CalculatorFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
         } else {
             Operation opDone = (Operation) response.getObject();
-            
-            // TODO: USE VALUESCONTROLLER
-            
-            fieldResult.setText(Formatter.format(opDone.getResult()));
-            fieldNumber1.setText(Formatter.format(opDone.getNumber1()));
-            fieldNumber2.setText(Formatter.format(opDone.getNumber2()));
+
+            Response resultFormat = ValuesController.format(opDone.getResult());
+            Response number1Format = ValuesController.format(opDone.getNumber1());
+            Response number2Format = ValuesController.format(opDone.getNumber2());
+
+            if (resultFormat.getStatus() >= 500) {
+                JOptionPane.showMessageDialog(null, resultFormat.getMessage(), "Error " + resultFormat.getStatus(), JOptionPane.ERROR_MESSAGE);
+            }
+            if (number1Format.getStatus() >= 500) {
+                JOptionPane.showMessageDialog(null, number1Format.getMessage(), "Error " + number1Format.getStatus(), JOptionPane.ERROR_MESSAGE);
+            }
+            if (number2Format.getStatus() >= 500) {
+                JOptionPane.showMessageDialog(null, number2Format.getMessage(), "Error " + number2Format.getStatus(), JOptionPane.ERROR_MESSAGE);
+            }
+
+            fieldResult.setText((String) resultFormat.getObject());
+            fieldNumber1.setText((String) number1Format.getObject());
+            fieldNumber2.setText((String) number2Format.getObject());
 
             JOptionPane.showMessageDialog(null, response.getMessage(), "Success", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -308,7 +332,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         String number1 = fieldNumber1.getText();
         String number2 = fieldNumber2.getText();
-        
+
         Response response = DivisionController.div(number1, number2);
 
         if (response.getStatus() >= 500) {
@@ -317,12 +341,24 @@ public class CalculatorFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
         } else {
             Operation opDone = (Operation) response.getObject();
-            
-            // TODO: USE VALUESCONTROLLER
-            
-            fieldResult.setText(Formatter.format(opDone.getResult()));
-            fieldNumber1.setText(Formatter.format(opDone.getNumber1()));
-            fieldNumber2.setText(Formatter.format(opDone.getNumber2()));
+
+            Response resultFormat = ValuesController.format(opDone.getResult());
+            Response number1Format = ValuesController.format(opDone.getNumber1());
+            Response number2Format = ValuesController.format(opDone.getNumber2());
+
+            if (resultFormat.getStatus() >= 500) {
+                JOptionPane.showMessageDialog(null, resultFormat.getMessage(), "Error " + resultFormat.getStatus(), JOptionPane.ERROR_MESSAGE);
+            }
+            if (number1Format.getStatus() >= 500) {
+                JOptionPane.showMessageDialog(null, number1Format.getMessage(), "Error " + number1Format.getStatus(), JOptionPane.ERROR_MESSAGE);
+            }
+            if (number2Format.getStatus() >= 500) {
+                JOptionPane.showMessageDialog(null, number2Format.getMessage(), "Error " + number2Format.getStatus(), JOptionPane.ERROR_MESSAGE);
+            }
+
+            fieldResult.setText((String) resultFormat.getObject());
+            fieldNumber1.setText((String) number1Format.getObject());
+            fieldNumber2.setText((String) number2Format.getObject());
 
             JOptionPane.showMessageDialog(null, response.getMessage(), "Success", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -332,7 +368,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         String number1 = fieldNumber1.getText();
         String number2 = fieldNumber2.getText();
-        
+
         Response response = ExponentiationController.pow(number1, number2);
 
         if (response.getStatus() >= 500) {
@@ -341,12 +377,24 @@ public class CalculatorFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
         } else {
             Operation opDone = (Operation) response.getObject();
-            
-            // TODO: USE VALUESCONTROLLER
-            
-            fieldResult.setText(Formatter.format(opDone.getResult()));
-            fieldNumber1.setText(Formatter.format(opDone.getNumber1()));
-            fieldNumber2.setText(Formatter.format(opDone.getNumber2()));
+
+            Response resultFormat = ValuesController.format(opDone.getResult());
+            Response number1Format = ValuesController.format(opDone.getNumber1());
+            Response number2Format = ValuesController.format(opDone.getNumber2());
+
+            if (resultFormat.getStatus() >= 500) {
+                JOptionPane.showMessageDialog(null, resultFormat.getMessage(), "Error " + resultFormat.getStatus(), JOptionPane.ERROR_MESSAGE);
+            }
+            if (number1Format.getStatus() >= 500) {
+                JOptionPane.showMessageDialog(null, number1Format.getMessage(), "Error " + number1Format.getStatus(), JOptionPane.ERROR_MESSAGE);
+            }
+            if (number2Format.getStatus() >= 500) {
+                JOptionPane.showMessageDialog(null, number2Format.getMessage(), "Error " + number2Format.getStatus(), JOptionPane.ERROR_MESSAGE);
+            }
+
+            fieldResult.setText((String) resultFormat.getObject());
+            fieldNumber1.setText((String) number1Format.getObject());
+            fieldNumber2.setText((String) number2Format.getObject());
 
             JOptionPane.showMessageDialog(null, response.getMessage(), "Success", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -378,39 +426,15 @@ public class CalculatorFrame extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
-     */
+     *
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CalculatorFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CalculatorFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CalculatorFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CalculatorFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CalculatorFrame().setVisible(true);
-            }
-        });
-    }
+         
+        
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clearNumbers;
