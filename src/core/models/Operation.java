@@ -41,6 +41,11 @@ public abstract class Operation {
     public void setResult(double result) {
         this.result = result;
     }    
+
+    public String getOperator() {
+        return operator;
+    }
+    
     
     public abstract void evaluate();
 }
