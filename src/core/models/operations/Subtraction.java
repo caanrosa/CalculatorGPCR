@@ -18,12 +18,8 @@ public class Subtraction extends Operation
     }
 
     @Override
-    public boolean evaluate() {
-        double result = this.number1 - this.number2;
-        if(Double.isInfinite(result)) return false;
-        
+    public void evaluate() {
         this.setResult(this.number1 - this.number2);
-        return true;
     }
     
 }

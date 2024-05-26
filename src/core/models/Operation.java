@@ -47,5 +47,5 @@ public abstract class Operation {
     }
     
     
-    public abstract boolean evaluate();
+    public abstract void evaluate();
 }

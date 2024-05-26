@@ -48,12 +48,15 @@ public class ExponentiationController {
         }
 
         Exponentiation operation = new Exponentiation(number1, number2);
-        if (operation.evaluate()) {
+        operation.evaluate();
+        double result = operation.getResult();
+
+        if (Double.isInfinite(result) || Double.isNaN(result)) {
+            return new Response("Exponentiation error: Math err", Status.INTERNAL_SERVER_ERROR);
+        } else {
             history.addOperation(operation); // LISKOV’S
             return new Response("Exponentiation done successfully", Status.OK, operation);
-        } else {
-            return new Response("Exponentiation error: Math err", Status.INTERNAL_SERVER_ERROR);
         }
-        
+
     }
 }
