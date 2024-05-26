@@ -17,8 +17,12 @@ public class Division extends Operation {
     }
 
     @Override
-    public void evaluate() {
+    public boolean evaluate() {
+        double result = this.number1 / this.number2;
+        if(Double.isInfinite(result)) return false;
+        
         this.setResult(this.number1 / this.number2);
+        return true;
     }
     
 }

@@ -17,8 +17,13 @@ public class Exponentiation extends Operation {
     }
 
     @Override
-    public void evaluate() {
-        this.setResult(Math.pow(this.number1, this.number2));
+    public boolean evaluate() {
+        double result = Math.pow(this.number1, this.number2);
+        
+        if(Double.isInfinite(result)) return false;
+        
+        this.setResult(result);
+        return true;
     }
     
 }

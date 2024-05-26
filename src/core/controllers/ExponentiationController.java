@@ -33,6 +33,13 @@ public class ExponentiationController {
             return new Response("Number 2 must be numeric", Status.BAD_REQUEST);
         }
 
+        if (Double.isInfinite(number1)) {
+            return new Response("Number 1 is too large", Status.INTERNAL_SERVER_ERROR);
+        }
+        if (Double.isInfinite(number2)) {
+            return new Response("Number 2 is too large", Status.INTERNAL_SERVER_ERROR);
+        }
+
         if (!DecimalChecker.check(number1)) {
             return new Response("Number 1 must have less than 3 decimals", Status.BAD_REQUEST);
         }
@@ -40,10 +47,13 @@ public class ExponentiationController {
             return new Response("Number 2 must have less than 3 decimals", Status.BAD_REQUEST);
         }
 
-        Operation operation = new Exponentiation(number1, number2);
-        operation.evaluate();
-        history.addOperation(operation);
-
-        return new Response("Exponentiation done successfully", Status.OK, operation);
+        Exponentiation operation = new Exponentiation(number1, number2);
+        if (operation.evaluate()) {
+            history.addOperation(operation); // LISKOV’S
+            return new Response("Exponentiation done successfully", Status.OK, operation);
+        } else {
+            return new Response("Exponentiation error: Math err", Status.INTERNAL_SERVER_ERROR);
+        }
+        
     }
 }
